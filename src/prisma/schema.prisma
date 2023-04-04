@@ -1,0 +1,144 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["filteredRelationCount"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+//model User {
+//  id               String             @id @default(auto()) @map("_id") @db.ObjectId
+//  email            String             @unique
+//  password         String
+//  firstName        String
+//  lastName         String
+//  pesel            String                @unique
+//  phoneNumber      Int
+//  role             UserRole
+//  createdAt        DateTime           @default(now())
+//  updatedAt        DateTime           @updatedAt
+//  isActive         Boolean            @default(true)
+//  disabled         Boolean            @default(false)
+//  rentals          AssetRental[]
+//  AssetReservation AssetReservation[]
+//  chatMessages     ChatMessage[]
+//  chatRoomIds String[]   @db.ObjectId
+//  chatRooms  ChatRoom[] @relation(fields: [chatRoomIds], references: [id])
+//}
+//
+//model Asset {
+//  id               String          @id @default(auto()) @map("_id") @db.ObjectId
+//  title            String
+//  image            AssetImage      @relation(fields: [imageId], references: [id])
+//  imageId          String          @db.ObjectId
+//  author           AssetAuthor     @relation(fields: [authorId], references: [id])
+//  authorId         String          @db.ObjectId
+//  publisher        String
+//  publicationYear  Int
+//  description      String?
+//  isbn             String          @unique
+//  type             AssetType
+//  lubimyczytacLink String?
+//  categories       AssetCategory[] @relation(fields: [categoryIds], references: [id])
+//  categoryIds      String[]        @db.ObjectId
+//  copies           AssetCopy[]
+//  createdAt        DateTime        @default(now())
+//  updatedAt        DateTime        @updatedAt
+//  disabled         Boolean         @default(false)
+//}
+//
+//model AssetCategory {
+//  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+//  name     String   @unique
+//  assets   Asset[]  @relation(fields: [assetIds], references: [id])
+//  assetIds String[] @db.ObjectId
+//}
+//
+//model AssetAuthor {
+//  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+//  firstName String
+//  lastName  String
+//  assets    Asset[]
+//  disabled  Boolean @default(false)
+//}
+//
+//model AssetImage {
+//  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+//  fileName String  @unique
+//  path     String  @unique
+//  assets   Asset[]
+//}
+//
+//model AssetCopy {
+//  id              String             @id @default(auto()) @map("_id") @db.ObjectId
+//  inventoryNumber String             @unique
+//  asset           Asset              @relation(fields: [assetId], references: [id])
+//  assetId         String             @db.ObjectId
+//  isFreeAccess    Boolean
+//  createdAt       DateTime           @default(now())
+//  updatedAt       DateTime           @updatedAt
+//  rentals         AssetRental[]
+//  reservations    AssetReservation[]
+//  disabled        Boolean            @default(false)
+//}
+//
+//model AssetRental {
+//  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+//  copy       AssetCopy @relation(fields: [copyId], references: [id])
+//  copyId     String    @db.ObjectId
+//  user       User      @relation(fields: [userId], references: [id])
+//  userId     String    @db.ObjectId
+//  createdAt  DateTime  @default(now())
+//  expiredAt  DateTime?
+//  returnedAt DateTime?
+//  isReturned Boolean   @default(false)
+//}
+//
+//model AssetReservation {
+//  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+//  copy      AssetCopy @relation(fields: [copyId], references: [id])
+//  copyId    String    @db.ObjectId
+//  user      User      @relation(fields: [userId], references: [id])
+//  userId    String    @db.ObjectId
+//  createdAt DateTime  @default(now())
+//  expiredAt DateTime?
+//  isExpired Boolean   @default(false)
+//}
+//
+//model ChatMessage {
+//    id        String    @id @default(auto()) @map("_id") @db.ObjectId
+//    sender    User      @relation(fields: [senderId], references: [id])
+//    senderId  String    @db.ObjectId
+//    room      ChatRoom  @relation(fields: [roomId], references: [id])
+//    roomId    String    @db.ObjectId
+//    isReadOut Boolean   @default(false)
+//    createdAt DateTime  @default(now())
+//    content   String
+//}
+//
+//model ChatRoom {
+//    id        String    @id @default(auto()) @map("_id") @db.ObjectId
+//    memberIds String[]  @db.ObjectId
+//    members   User[]    @relation(fields: [memberIds], references: [id])
+//    messages  ChatMessage[]
+//    createdAt DateTime  @default(now())
+//    updatedAt DateTime  @updatedAt
+//}
+//
+//// enums
+//
+//enum AssetType {
+//  BOOK
+//  AUDIOBOOK
+//  MAGAZINE
+//}
+//
+//enum UserRole {
+//  LIBRARIAN
+//  READER
+//}
