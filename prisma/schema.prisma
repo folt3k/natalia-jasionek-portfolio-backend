@@ -1,0 +1,26 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["filteredRelationCount"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Image {
+    id               String      @id @default(auto()) @map("_id") @db.ObjectId
+    externalAssetId       String     @unique
+    externalPublicId       String
+    createdAt        DateTime
+}
+
+model ImageCategory {
+    id               String      @id @default(auto()) @map("_id") @db.ObjectId
+    createdAt        DateTime           @default(now())
+    updatedAt        DateTime           @updatedAt
+    name             String     @unique
+}
