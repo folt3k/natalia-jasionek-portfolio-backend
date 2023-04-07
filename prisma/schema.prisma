@@ -17,6 +17,8 @@ model Image {
     externalPublicId       String
     url              String
     createdAt        DateTime
+    category         ImageCategory?   @relation(fields: [categoryId], references: [id])
+    categoryId       String? @db.ObjectId
 }
 
 model ImageCategory {
@@ -24,4 +26,5 @@ model ImageCategory {
     createdAt        DateTime           @default(now())
     updatedAt        DateTime           @updatedAt
     name             String      @unique
+    images           Image[]
 }

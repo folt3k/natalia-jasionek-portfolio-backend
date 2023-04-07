@@ -1,6 +1,9 @@
 import { NextFunction, Router, Request, Response } from "express";
 import { CdnProviderNotificationTypes } from "./cdn-provider.types";
-import { onCreateFolderNotification } from "./cdn-provider.service";
+import {
+  onCreateFolderNotification,
+  onUploadImageNotification,
+} from "./cdn-provider.service";
 
 const router = Router();
 
@@ -14,6 +17,9 @@ router.post(
       switch (notificationType) {
         case CdnProviderNotificationTypes.CreateFolder:
           await onCreateFolderNotification(req.body);
+          break;
+        case CdnProviderNotificationTypes.UploadImage:
+          await onUploadImageNotification(req.body);
           break;
       }
       return res.sendStatus(204);
