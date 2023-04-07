@@ -15,6 +15,7 @@ model Image {
     id               String      @id @default(auto()) @map("_id") @db.ObjectId
     externalAssetId       String     @unique
     externalPublicId       String
+    url              String
     createdAt        DateTime
 }
 
@@ -22,5 +23,5 @@ model ImageCategory {
     id               String      @id @default(auto()) @map("_id") @db.ObjectId
     createdAt        DateTime           @default(now())
     updatedAt        DateTime           @updatedAt
-    name             String     @unique
+    name             String      @unique
 }
