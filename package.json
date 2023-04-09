@@ -2,7 +2,7 @@
   "name": "natalia-jasionek-portfolio-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "/dist/src/index.js",
   "scripts": {
     "dev": "nodemon ./src/index.ts",
     "start": "node ./dist/src/index.js",
