@@ -1,5 +1,5 @@
 import { NextFunction, Router, Request, Response } from "express";
-import { getImageCategories } from "./images.service";
+import { getImageCategories, getImages } from "./images.service";
 
 const router = Router();
 
@@ -10,6 +10,19 @@ router.get(
       const categories = await getImageCategories();
 
       res.json(categories);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+router.get(
+  "/images",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const images = await getImages(req.query);
+
+      res.json(images);
     } catch (err) {
       next(err);
     }
