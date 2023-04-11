@@ -60,3 +60,13 @@ export const onUploadImageNotification = async (dto: {
     },
   });
 };
+
+export const onRemoveImage = async (dto: {
+  resources: Array<{ asset_id: string }>;
+}) => {
+  await prisma.$transaction(
+    dto.resources.map((item) =>
+      prisma.image.delete({ where: { externalAssetId: item.asset_id } })
+    )
+  );
+};

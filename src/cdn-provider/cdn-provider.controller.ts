@@ -3,6 +3,7 @@ import { CdnProviderNotificationTypes } from "./cdn-provider.types";
 import {
   onCreateFolderNotification,
   onMoveImagesToFolder,
+  onRemoveImage,
   onUploadImageNotification,
 } from "./cdn-provider.service";
 
@@ -26,6 +27,9 @@ router.post(
           break;
         case CdnProviderNotificationTypes.MoveToFolder:
           await onMoveImagesToFolder(req.body);
+          break;
+        case CdnProviderNotificationTypes.DeleteImage:
+          await onRemoveImage(req.body);
           break;
       }
       return res.sendStatus(204);
