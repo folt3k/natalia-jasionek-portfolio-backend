@@ -9,6 +9,32 @@ export const onCreateFolderNotification = (dto: { folder_name: string }) => {
   });
 };
 
+export const onMoveImagesToFolder = async (dto: {
+  resources: {
+    [key: string]: {
+      asset_id: string;
+      to_asset_folder: string;
+    };
+  };
+}) => {
+  const categories = await prisma.imageCategory.findMany();
+
+  await Promise.all(
+    Object.values(dto.resources).map((item) =>
+      prisma.image.update({
+        where: {
+          externalAssetId: item.asset_id,
+        },
+        data: {
+          categoryId: categories.find(
+            (cat) => cat.name === item.to_asset_folder
+          )?.id,
+        },
+      })
+    )
+  );
+};
+
 export const onUploadImageNotification = async (dto: {
   asset_id: string;
   public_id: string;
