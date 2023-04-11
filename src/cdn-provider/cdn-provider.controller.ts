@@ -13,6 +13,8 @@ router.post(
     const notificationType: CdnProviderNotificationTypes =
       req.body.notification_type;
 
+    console.log(req.body);
+
     try {
       switch (notificationType) {
         case CdnProviderNotificationTypes.CreateFolder:
