@@ -1,4 +1,5 @@
 import prisma from "../../prisma/client";
+import { generateImagesFormats } from "./images.helpers";
 
 export const getImageCategories = async (): Promise<
   Array<{ name: string }>
@@ -28,12 +29,12 @@ export const getImages = async (
   page: number;
   perPage: number;
   total: number;
-  items: Array<{ url: string }>;
+  items: Array<{ formats: { md: string; full: string } }>;
 }> => {
   const page = params.page ? +params.page : 1;
   const perPage = params.perPage ? +params.perPage : 10;
 
-  const data  = await prisma.image.findMany({
+  const data = await prisma.image.findMany({
     where: {
       ...(params.category
         ? {
@@ -66,6 +67,15 @@ export const getImages = async (
     page,
     perPage,
     total,
-    items: data.map((item) => ({ url: item.url })),
+    items: data.map((item) => {
+      const imageFormatsGenerator = generateImagesFormats(item.url);
+
+      return {
+        formats: {
+          md: imageFormatsGenerator("md"),
+          full: imageFormatsGenerator("full"),
+        },
+      };
+    }),
   };
 };
