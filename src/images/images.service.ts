@@ -29,7 +29,7 @@ export const getImages = async (
   page: number;
   perPage: number;
   total: number;
-  items: Array<{ formats: { md: string; full: string } }>;
+  items: Array<{ id: string; formats: { md: string; full: string } }>;
 }> => {
   const page = params.page ? +params.page : 1;
   const perPage = params.perPage ? +params.perPage : 10;
@@ -71,6 +71,7 @@ export const getImages = async (
       const imageFormatsGenerator = generateImagesFormats(item.url);
 
       return {
+        id: item.id,
         formats: {
           md: imageFormatsGenerator("md"),
           full: imageFormatsGenerator("full"),
