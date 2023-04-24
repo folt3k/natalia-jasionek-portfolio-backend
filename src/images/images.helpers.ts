@@ -8,7 +8,7 @@ export const generateImagesFormats =
         urlFormatValue = "q_auto:best";
         break;
       case "md":
-        urlFormatValue = "q_100/c_fill,w_512";
+        urlFormatValue = "t_Instagram%20feed";
         break;
     }
 
