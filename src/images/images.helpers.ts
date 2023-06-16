@@ -5,7 +5,7 @@ export const generateImagesFormats =
 
     switch (format) {
       case "full":
-        urlFormatValue = "q_auto:best";
+        urlFormatValue = "q_auto:best/w_2000,h_2000,c_limit";
         break;
       case "md":
         urlFormatValue = "t_Instagram%20feed";
